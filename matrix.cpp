@@ -46,5 +46,63 @@ matrix::matrix(int r, int c)
 //6 array of double and the size of array
 matrix::matrix(double* inArr, int size)
 {
-    
+    int squrt = sqrt(size);
+    if(squrt*squrt == size)
+    {
+        int counter = 0;
+        double2d.resize(squrt);
+        for(int i = 0; i < squrt; i++)
+        {
+            double2d[i].resize(squrt);
+            for(int i2 = 0; i2 < squrt; i2++)
+            {
+                double2d[i][i2] = inArr[counter];
+                counter++;
+            }
+        }
+    }
 }
+
+//7 3 param mutator
+void matrix::set_value(int r, int c, double value)
+{
+    if(r < 0 || c < 0 || r > double2d.size() || c > double2d[0].size())
+    {
+        //throw exception
+    }
+    double2d[r][c] = value;
+}
+
+//8 2 param getter
+double matrix::get_value(int r, int c)
+{
+    if(r < 0 || c < 0 || r > double2d.size() || c > double2d[0].size())
+    {
+        //throw exception
+    }
+    return double2d[r][c];
+}
+
+//9 clear function
+void matrix::clear()
+{
+    for(int i = 0; i < double2d.size(); i++)
+    {
+        for(int i2 = 0; i2 < double2d[0].size(); i2++)
+        {
+            double2d[i][i2] = 0.0;
+        }
+    }
+}
+
+matrix::~matrix()
+{
+    for(int i = 0; i < double2d.size(); i++)
+    {
+        double2d[i].clear();
+    }
+    double2d.clear();
+}
+
+
+

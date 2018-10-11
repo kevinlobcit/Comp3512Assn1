@@ -15,6 +15,12 @@ class matrix {
     matrix(int);
     matrix(int, int);
     matrix(double*, int);
+    void set_value(int, int, double);
+    double get_value(int, int);
+    void clear();
+    ~matrix();
+
+
 };
 
 
