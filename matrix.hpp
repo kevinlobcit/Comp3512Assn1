@@ -8,7 +8,7 @@
 #ifndef COMP3512ASSN1_MATRIX_HPP
 #define COMP3512ASSN1_MATRIX_HPP
 
-
+//Making matrixes
 class matrix {
 private:
     std::vector<std::vector<double>> double2d;
@@ -21,6 +21,8 @@ public:
     double get_value(int, int);
     void clear();
     ~matrix();
+
+    //Operator Overloads
     friend std::ostream& operator<<(std::ostream&, matrix);
     friend bool operator ==(matrix, matrix);
     friend bool operator !=(matrix, matrix);

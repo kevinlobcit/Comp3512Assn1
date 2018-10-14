@@ -205,11 +205,13 @@ matrix operator--(matrix& matrix1, int)
     return temp;
 }
 
+//= operator overload
 matrix& matrix::operator=(const matrix& matrix2)
 {
     swap(this, matrix2, this->double2d.size(), this->double2d[0].size());
 }
 
+//swap assist for = ovperator overload
 void swap(matrix* matrix1, matrix matrix2, int sizex, int sizey)
 {
     for(int i = 0; i < sizex; i++)
@@ -221,6 +223,7 @@ void swap(matrix* matrix1, matrix matrix2, int sizex, int sizey)
     }
 }
 
+//+ operator overload
 matrix& operator+=(matrix& matrix1, matrix matrix2)
 {
 
@@ -255,6 +258,7 @@ matrix& operator+(matrix& matrix1, matrix matrix2)
     return matrix1;
 }
 
+//- operator overloading
 matrix& operator-=(matrix& matrix1, matrix matrix2)
 {
 
@@ -289,66 +293,81 @@ matrix& operator-(matrix& matrix1, matrix matrix2)
     return matrix1;
 }
 
-matrix& operator*(matrix& matrix1, matrix matrix2)
+
+//* operator overloading
+matrix& operator*(matrix& A, matrix B)
 {
-    if(matrix1.double2d[0].size() != matrix2.double2d.size())
-        throw "Array size not matching";
 
-    matrix newMatrix = matrix(matrix1.double2d.size(), matrix2.double2d[0].size());
-
-    //std::cout << matrix1;
-
-    for(int i = 0; i < matrix1.double2d.size(); i++)
+    if(A.double2d[0].size() != B.double2d.size())
     {
-        for(int i2 = 0; i2 < matrix2.double2d[0].size(); i2++)
+        std::cout << "Does not match";
+        throw "Array size not matching";
+    }
+
+
+
+    int a = A.double2d.size(); //n is matrix 1's y
+    int b = A.double2d[0].size(); //n is matrix 1's x
+    int c = B.double2d.size(); //p is matrix 2's y
+    int d = B.double2d[0].size(); //m is matrix 2's x
+
+    std::cout << A;
+    std::cout << B;
+    //m is  b or c
+    //n = 3 a
+    //p =4 d
+
+
+    std::cout << "values" << std::endl; //array size is n1*p ->>> p*n1 in my array
+    std::cout <<a <<" " << b << " " <<  c << " " << d << std::endl;
+
+    matrix newMatrix = matrix(a, d);
+    //Multiplying matrix
+    for(int i = 0; i < a; i++)
+    {
+        for(int j = 0; j < d; j++)
         {
             double sum = 0;
-            for(int i3 = 0; i3 < matrix2.double2d.size(); i3++)
+            for(int k = 0; k < b; k++)
+            {
+                sum+=A.get_value(i,k) * B.get_value(k,j);
+            }
+            newMatrix.set_value(i,j,sum);
+        }
+    }
+
+
+
+
+    /*
+        for(int i2 = 0; i2 < p; i2++)
+        {
+            double sum = 0;
+            for(int i3 = 0; i3 < m; i3++)
             {
                 sum += matrix1.double2d[i][i3] * matrix2.double2d[i3][i2];
             }
-            newMatrix.set_value(i,i2,sum);
+            newMatrix.set_value(i2,i,sum);
         }
-    }
-    //std::cout << newMatrix;
-    matrix1.double2d.resize(matrix1.double2d.size());
-    for(int i = 0; i<matrix1.double2d.size(); i++)
+         */
+
+    //std::cout<<newMatrix;
+
+    A.double2d.resize(a);
+    for(int i = 0; i<a; i++)
     {
-        matrix1.double2d[i].resize(matrix2.double2d[0].size());
+        A.double2d[i].resize(d);
     }
-    matrix1 = newMatrix;
-    return matrix1;
+    A = newMatrix;
+
+    return A;
 }
 
-matrix& operator*=(matrix& matrix1, matrix matrix2)
+matrix& operator*=(matrix& A, matrix B)
 {
-    if(matrix1.double2d[0].size() != matrix2.double2d.size())
-        throw "Array size not matching";
 
-    matrix newMatrix = matrix(matrix1.double2d.size(), matrix2.double2d[0].size());
 
-    //std::cout << matrix1;
-
-    for(int i = 0; i < matrix1.double2d.size(); i++)
-    {
-        for(int i2 = 0; i2 < matrix2.double2d[0].size(); i2++)
-        {
-            double sum = 0;
-            for(int i3 = 0; i3 < matrix2.double2d.size(); i3++)
-            {
-                sum += matrix1.double2d[i][i3] * matrix2.double2d[i3][i2];
-            }
-            newMatrix.set_value(i,i2,sum);
-        }
-    }
-    //std::cout << newMatrix;
-    matrix1.double2d.resize(matrix1.double2d.size());
-    for(int i = 0; i<matrix1.double2d.size(); i++)
-    {
-        matrix1.double2d[i].resize(matrix2.double2d[0].size());
-    }
-    matrix1 = newMatrix;
-    return matrix1;
+    return A;
 }
 
 
