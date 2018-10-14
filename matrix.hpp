@@ -40,8 +40,8 @@ public:
     friend matrix& operator-=(matrix&, matrix);
     friend matrix& operator-(matrix&, matrix);
 
-    friend matrix& operator*(matrix&, matrix);
-    friend matrix& operator*=(matrix&, matrix);
+    friend matrix& operator*(matrix, matrix&);
+    friend matrix& operator*=(matrix, matrix&);
 
 
 

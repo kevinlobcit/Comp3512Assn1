@@ -13,7 +13,9 @@ public:
     pageRank();
     matrix getImportance(matrix, int); //Page importances
     matrix randomWalk(matrix, double, int); //random walk
-    matrix& markov(matrix, matrix&); //markov process
+    void prepRank(matrix&, int);
+    matrix& markov(matrix, matrix&, int); //markov process
+    void printPercent(matrix, int); //print the percentage
 };
 
 

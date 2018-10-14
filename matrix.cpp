@@ -295,7 +295,7 @@ matrix& operator-(matrix& matrix1, matrix matrix2)
 
 
 //* operator overloading
-matrix& operator*(matrix& A, matrix B)
+matrix& operator*(matrix A, matrix &B)
 {
 
     if(A.double2d[0].size() != B.double2d.size())
@@ -311,15 +311,14 @@ matrix& operator*(matrix& A, matrix B)
     int c = B.double2d.size(); //p is matrix 2's y
     int d = B.double2d[0].size(); //m is matrix 2's x
 
-    std::cout << A;
-    std::cout << B;
+    //std::cout << A;
+    //std::cout << B;
     //m is  b or c
     //n = 3 a
     //p =4 d
 
 
-    std::cout << "values" << std::endl; //array size is n1*p ->>> p*n1 in my array
-    std::cout <<a <<" " << b << " " <<  c << " " << d << std::endl;
+    //std::cout << "values" << std::endl; //array size is n1*p ->>> p*n1 in my array
 
     matrix newMatrix = matrix(a, d);
     //Multiplying matrix
@@ -336,38 +335,21 @@ matrix& operator*(matrix& A, matrix B)
         }
     }
 
-
-
-
-    /*
-        for(int i2 = 0; i2 < p; i2++)
-        {
-            double sum = 0;
-            for(int i3 = 0; i3 < m; i3++)
-            {
-                sum += matrix1.double2d[i][i3] * matrix2.double2d[i3][i2];
-            }
-            newMatrix.set_value(i2,i,sum);
-        }
-         */
-
-    //std::cout<<newMatrix;
-
-    A.double2d.resize(a);
+    B.double2d.resize(a);
     for(int i = 0; i<a; i++)
     {
-        A.double2d[i].resize(d);
+        B.double2d[i].resize(d);
     }
-    A = newMatrix;
+    B = newMatrix;
 
-    return A;
+    return B;
 }
 
-matrix& operator*=(matrix& A, matrix B)
+matrix& operator*=(matrix A, matrix &B)
 {
 
 
-    return A;
+    return A*B;
 }
 
 

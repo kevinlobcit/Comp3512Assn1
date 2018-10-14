@@ -3,6 +3,8 @@
 //
 
 #include "pageRank.hpp"
+#include <iomanip>
+
 
 pageRank::pageRank()
 {
@@ -62,24 +64,35 @@ matrix pageRank::randomWalk(matrix S, double p, int n)
     return S;
 }
 
-matrix& pageRank::markov(matrix M, matrix& rank)
+void pageRank::prepRank(matrix& rank, int W)
 {
-    rank.set_value(0,0,1);
-    rank.set_value(1,0,1);
-    rank.set_value(2,0,1);
-    rank.set_value(3,0,1);
+    for(int i = 0; i < W; i++)
+    {
+        rank.set_value(i,0,1);
+    }
+}
 
+matrix& pageRank::markov(matrix M, matrix& rank, int W)
+{
+    prepRank(rank, W);
     bool markDone = 0;
+    matrix previous = rank;
     while(markDone == 0)
     {
         rank = M*rank;
-        std::cout << rank;
-        if(rank == M*rank)
+        if(rank == previous)
             markDone = 1;
+        previous = rank;
     }
-
-    std::cout << rank;
-
+    //std::cout<<rank;
     return rank;
+}
+
+void pageRank::printPercent(matrix rank, int W)
+{
+    for(int i = 0; i < W; i++)
+    {
+        std::cout<< "Page " << i+1 << ": " << std::setprecision(2) << std::fixed << rank.get_value(i,0)/W*100 << "%" << std::endl;
+    }
 }
 
