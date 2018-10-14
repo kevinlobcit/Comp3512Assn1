@@ -1,5 +1,6 @@
 #include <iostream>
 #include "matrix.hpp"
+#include "pageRank.hpp"
 
 int main() {
 
@@ -16,9 +17,12 @@ int main() {
     G.set_value(2,1,1);
     std::cout << G;
 
+    pageRank ranker = pageRank();
+    matrix importance = ranker.getImportance(G, W);
+    std::cout << "Importance" << std::endl;
+    //std::cout << importance;
 
-
-
+    ranker.randomWalk(G, 0.85);
 
     return 0;
 }
