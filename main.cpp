@@ -2,59 +2,50 @@
 #include "matrix.hpp"
 #include "pageRank.hpp"
 #include <fstream>
+#include <vector>
+#include <sstream>
+#include <stdio.h>
 
 int main() {
-    //Setting values
+    //Inputting the array of the text file in
+    std::vector<int> matrixVector;
+    std::ifstream file;
+    file.open("connectivity.txt"); //inside the debug folder
 
-    std::ifstream f;
-    f.open("connectivity.txt");
-    std::string line;
-    if(f.is_open())
+    int number = 0;
+    while(file >> number)
     {
-        while(getline(f, line))
-        {
-            std::cout << line << '\n';
-        }
-        f.close();
+        matrixVector.push_back(number);
     }
-    else std::cout << "Unable to open file";
+    file.close();
+    int W = (int)sqrt(matrixVector.size());
 
-
-
-    int W = 4;
     matrix G = matrix(W);
-    G.set_value(0,1,1);
-    G.set_value(0,2,1);
+    int counter = 0;
+    int i = 0;
+    int i2 = 0;
+    while(counter < W*W)
+    {
+        if(counter%W == 0 && counter != 0)
+        {
 
-    G.set_value(1,0,1);
-    G.set_value(1,2,1);
-
-    G.set_value(2,0,1);
-    G.set_value(2,1,1);
-    //std::cout << G;
-
-
-
-
-
-
-
-
+            i2++;
+            i = 0;
+        }
+        G.set_value(i2,i,matrixVector.at(counter));
+        i++;
+        counter++;
+    }
+    std::cout<<G;
 
     pageRank ranker = pageRank();
     matrix importance = ranker.getImportance(G, W);
-    //std::cout << "Importance" << std::endl;
-    //std::cout << importance;
-
-    //std::cout << "Random walk" << std:: endl;
     matrix M = ranker.randomWalk(importance, 0.85, W);
-    //std::cout<<M;
 
-    //std::cout << "Markov" << std::endl;
-    matrix rank = matrix(4,1);
+    matrix rank = matrix(W,1);
     ranker.markov(M, rank, W);
-    //std::cout<<rank;
 
     ranker.printPercent(rank, W);
+
     return 0;
 }

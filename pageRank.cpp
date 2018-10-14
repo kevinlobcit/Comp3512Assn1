@@ -88,7 +88,7 @@ matrix& pageRank::markov(matrix M, matrix& rank, int W)
     return rank;
 }
 
-void pageRank::printPercent(matrix rank, int W)
+void pageRank::printPercent(matrix rank, int W) const
 {
     for(int i = 0; i < W; i++)
     {

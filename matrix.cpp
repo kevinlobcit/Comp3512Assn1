@@ -75,7 +75,7 @@ void matrix::set_value(int r, int c, double value)
 }
 
 //8 2 param getter
-double matrix::get_value(int r, int c)
+double matrix::get_value(int r, int c) const
 {
     if(r < 0 || c < 0 || r > double2d.size() || c > double2d[0].size())
     {
@@ -351,6 +351,3 @@ matrix& operator*=(matrix A, matrix &B)
 
     return A*B;
 }
-
-
-

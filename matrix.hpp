@@ -4,6 +4,10 @@
 #include <vector>
 #include <math.h>
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <sstream>
+#include <stdio.h>
 
 #ifndef COMP3512ASSN1_MATRIX_HPP
 #define COMP3512ASSN1_MATRIX_HPP
@@ -17,8 +21,9 @@ public:
     matrix(int);
     matrix(int, int);
     matrix(double*, int);
+    matrix(std::string, int&); //special constructor to construct with designated file if possible because my array is backwards
     void set_value(int, int, double);
-    double get_value(int, int);
+    double get_value(int, int) const;
     void clear();
     ~matrix();
 
@@ -42,8 +47,6 @@ public:
 
     friend matrix& operator*(matrix, matrix&);
     friend matrix& operator*=(matrix, matrix&);
-
-
 
 };
 
