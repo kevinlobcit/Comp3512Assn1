@@ -11,6 +11,7 @@ pageRank::pageRank()
 
 }
 
+//Sorry not the recursive version
 matrix pageRank::getImportance(matrix pageMatrix, int size)
 {
     for(int i = 0; i < size; i++)
