@@ -3,20 +3,22 @@
 
 int main() {
 
-    matrix box = matrix(3);
-    box.set_value(2,2,10);
 
-    matrix box2 = matrix(3);
-    box2.set_value(1,2,4);
-    box2.set_value(1,1,4);
+    int W = 4;
+    matrix G = matrix(W);
+    G.set_value(0,1,1);
+    G.set_value(0,2,1);
+
+    G.set_value(1,0,1);
+    G.set_value(1,2,1);
+
+    G.set_value(2,0,1);
+    G.set_value(2,1,1);
+    std::cout << G;
 
 
 
 
-    box += box2;
 
-
-
-    std::cout << box;
     return 0;
 }
