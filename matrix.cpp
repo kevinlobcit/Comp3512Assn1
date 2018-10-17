@@ -77,6 +77,18 @@ void matrix::filler(std::string fileLocation, matrix& G, int& W)
     file.close();
     W = (int)sqrt(matrixVector.size());
 
+    try
+    {
+        if(W*W != matrixVector.size())
+        {
+            throw "Invalid input array string, not a square";
+        }
+    }
+    catch(const char* msg)
+    {
+        std::cerr << msg << std::endl;
+    }
+
     G.double2d.resize(W);
     for(int i = 0; i < W; i++)
     {
