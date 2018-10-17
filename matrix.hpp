@@ -22,7 +22,7 @@ public:
     matrix(int);
     matrix(int, int);
     matrix(double*, int);
-    matrix(std::string, int&); //special constructor to construct with designated file if possible because my array is backwards
+    void filler(std::string, matrix&, int&); //Resizes matrix to fit a square string of numbers with designated file if possible because my array is backwards
     void set_value(int, int, double);
     double get_value(int, int) const;
     void clear();
@@ -48,6 +48,7 @@ public:
 
     friend matrix& operator*(matrix, matrix&);
     friend matrix& operator*=(matrix, matrix&);
+
 
 };
 

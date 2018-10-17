@@ -63,6 +63,49 @@ matrix::matrix(double* inArr, int size)
     }
 }
 
+void matrix::filler(std::string fileLocation, matrix& G, int& W)
+{
+    std::vector<int> matrixVector;
+    std::ifstream file;
+    file.open(fileLocation); //inside the debug folder
+
+    int number = 0;
+    while(file >> number)
+    {
+        matrixVector.push_back(number);
+    }
+    file.close();
+    W = (int)sqrt(matrixVector.size());
+
+    G.double2d.resize(W);
+    for(int i = 0; i < W; i++)
+    {
+        G.double2d[i].resize(W);
+
+        //set to 0.0
+        for(int i2 = 0; i2 < W; i2++)
+        {
+            G.double2d[i][i2] = 0.0;
+        }
+    }
+    int counter = 0;
+    int i = 0;
+    int i2 = 0;
+    while(counter < W*W)
+    {
+        if(counter%W == 0 && counter != 0)
+        {
+
+            i2++;
+            i = 0;
+        }
+        G.set_value(i2,i,matrixVector.at(counter));
+        i++;
+        counter++;
+    }
+    //return G;
+}
+
 //7 3 param mutator
 void matrix::set_value(int r, int c, double value)
 {
