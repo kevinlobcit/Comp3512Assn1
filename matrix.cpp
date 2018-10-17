@@ -117,7 +117,7 @@ std::ostream& operator<<(std::ostream& os, matrix inMatrix)
     {
         for (int i2 = 0; i2 < double2d[i].size(); i2++)
         {
-            os << double2d[i][i2] << " ";
+            os << std::setw(8) <<double2d[i][i2] << " ";
         }
         os << std::endl;
     }

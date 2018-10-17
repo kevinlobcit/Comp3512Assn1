@@ -8,6 +8,7 @@
 #include <vector>
 #include <sstream>
 #include <stdio.h>
+#include <iomanip>
 
 #ifndef COMP3512ASSN1_MATRIX_HPP
 #define COMP3512ASSN1_MATRIX_HPP

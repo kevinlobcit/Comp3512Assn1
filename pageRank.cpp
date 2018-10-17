@@ -14,15 +14,15 @@ pageRank::pageRank()
 //Sorry not the recursive version
 matrix pageRank::getImportance(matrix pageMatrix, int size)
 {
-    for(int i = 0; i < size; i++)
+    for(int i2 = 0; i2 < size; i2++)
     {
         double sum = 0;
-        for(int i2 = 0; i2 < size; i2++)
+        for(int i = 0; i < size; i++)
         {
             if(pageMatrix.get_value(i,i2) == 1)
                 sum++;
         }
-        for(int i2 = 0; i2 < size; i2++)
+        for(int i = 0; i < size; i++)
         {
             if(sum != 0)
                 pageMatrix.set_value(i,i2,pageMatrix.get_value(i,i2)/sum);
@@ -73,22 +73,28 @@ void pageRank::prepRank(matrix& rank, int W)
     }
 }
 
-matrix& pageRank::markov(matrix M, matrix& rank, int W)
+//Is the markov process and takes a certain threshhold just in case so it doesnt infinitely loop
+matrix& pageRank::markov(matrix M, matrix& rank, int W, int threshhold)
 {
     prepRank(rank, W);
     bool markDone = 0;
+    int threshCounter = 0;
     matrix previous = rank;
-    while(markDone == 0)
+    while(markDone == 0 && threshCounter <= threshhold)
     {
+        threshCounter++;
         rank = M*rank;
         if(rank == previous)
             markDone = 1;
         previous = rank;
+        //std::cout<<rank <<std::endl;
+
     }
     //std::cout<<rank;
     return rank;
 }
 
+//Prince the percentage rate of each page
 void pageRank::printPercent(matrix rank, int W) const
 {
     for(int i = 0; i < W; i++)

@@ -7,7 +7,7 @@
 #include <stdio.h>
 
 int main() {
-    //Inputting the array of the text file in
+    //Inputting the array of hth
     std::vector<int> matrixVector;
     std::ifstream file;
     file.open("connectivity.txt"); //inside the debug folder
@@ -40,10 +40,11 @@ int main() {
 
     pageRank ranker = pageRank();
     matrix importance = ranker.getImportance(G, W);
+    std::cout << "Importance\n" << importance << std::endl;
     matrix M = ranker.randomWalk(importance, 0.85, W);
-
+    std::cout<<"randomwalk\n" << M <<std::endl;
     matrix rank = matrix(W,1);
-    ranker.markov(M, rank, W);
+    ranker.markov(M, rank, W, 10000);
 
     ranker.printPercent(rank, W);
 
