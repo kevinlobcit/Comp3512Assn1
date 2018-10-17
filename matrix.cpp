@@ -109,23 +109,37 @@ void matrix::filler(std::string fileLocation, matrix& G, int& W)
 //7 3 param mutator
 void matrix::set_value(int r, int c, double value)
 {
-    if(r < 0 || c < 0 || r > double2d.size() || c > double2d[0].size())
+    try
     {
-        throw "Out of range exception";
-        //throw exception
+        if(r < 0 || c < 0 || r > double2d.size() || c > double2d[0].size())
+        {
+            throw "Out of range exception";
+            //throw exception
+        }
+        double2d[r][c] = value;
     }
-    double2d[r][c] = value;
+    catch(const char* msg)
+    {
+        std::cerr << msg << std::endl;
+    }
 }
 
 //8 2 param getter
 double matrix::get_value(int r, int c) const
 {
-    if(r < 0 || c < 0 || r > double2d.size() || c > double2d[0].size())
+    try
     {
-        throw "Out of range exception";
-        //throw exception
+        if(r < 0 || c < 0 || r > double2d.size() || c > double2d[0].size())
+        {
+            throw "Out of range exception";
+            //throw exception
+        }
+        return double2d[r][c];
     }
-    return double2d[r][c];
+    catch(const char* msg)
+    {
+        std::cerr << msg << std::endl;
+    }
 }
 
 //9 clear function
@@ -269,11 +283,18 @@ void swap(matrix* matrix1, matrix matrix2, int sizex, int sizey)
 //+ operator overload
 matrix& operator+=(matrix& matrix1, matrix matrix2)
 {
+    try
+    {
+        if(matrix1.double2d.size() != matrix2.double2d.size())
+            throw "Array size not matching";
+        if(matrix1.double2d[0].size() != matrix2.double2d[0].size())
+            throw "Array size not matching";
+    }
+    catch(const char* msg)
+    {
+        std::cerr << msg << std::endl;
+    }
 
-    if(matrix1.double2d.size() != matrix2.double2d.size())
-        throw "Array size not matching";
-    if(matrix1.double2d[0].size() != matrix2.double2d[0].size())
-        throw "Array size not matching";
     for(int i = 0; i < matrix1.double2d.size(); i++)
     {
         for(int i2 = 0; i2 < matrix1.double2d[i].size(); i2++)
@@ -286,11 +307,18 @@ matrix& operator+=(matrix& matrix1, matrix matrix2)
 
 matrix& operator+(matrix& matrix1, matrix matrix2)
 {
+    try
+    {
+        if(matrix1.double2d.size() != matrix2.double2d.size())
+            throw "Array size not matching";
+        if(matrix1.double2d[0].size() != matrix2.double2d[0].size())
+            throw "Array size not matching";
+    }
+    catch(const char* msg)
+    {
+        std::cerr << msg << std::endl;
+    }
 
-    if(matrix1.double2d.size() != matrix2.double2d.size())
-        throw "Array size not matching";
-    if(matrix1.double2d[0].size() != matrix2.double2d[0].size())
-        throw "Array size not matching";
     for(int i = 0; i < matrix1.double2d.size(); i++)
     {
         for(int i2 = 0; i2 < matrix1.double2d[i].size(); i2++)
@@ -304,11 +332,19 @@ matrix& operator+(matrix& matrix1, matrix matrix2)
 //- operator overloading
 matrix& operator-=(matrix& matrix1, matrix matrix2)
 {
+    try
+    {
+        if(matrix1.double2d.size() != matrix2.double2d.size())
+            throw "Array size not matching";
+        if(matrix1.double2d[0].size() != matrix2.double2d[0].size())
+            throw "Array size not matching";
+    }
+    catch(const char* msg)
+    {
+        std::cerr << msg << std::endl;
+    }
 
-    if(matrix1.double2d.size() != matrix2.double2d.size())
-        throw "Array size not matching";
-    if(matrix1.double2d[0].size() != matrix2.double2d[0].size())
-        throw "Array size not matching";
+
     for(int i = 0; i < matrix1.double2d.size(); i++)
     {
         for(int i2 = 0; i2 < matrix1.double2d[i].size(); i2++)
@@ -322,10 +358,18 @@ matrix& operator-=(matrix& matrix1, matrix matrix2)
 matrix& operator-(matrix& matrix1, matrix matrix2)
 {
 
-    if(matrix1.double2d.size() != matrix2.double2d.size())
-        throw "Array size not matching";
-    if(matrix1.double2d[0].size() != matrix2.double2d[0].size())
-        throw "Array size not matching";
+    try
+    {
+        if(matrix1.double2d.size() != matrix2.double2d.size())
+            throw "Array size not matching";
+        if(matrix1.double2d[0].size() != matrix2.double2d[0].size())
+            throw "Array size not matching";
+    }
+    catch(const char* msg)
+    {
+        std::cerr << msg << std::endl;
+    }
+
     for(int i = 0; i < matrix1.double2d.size(); i++)
     {
         for(int i2 = 0; i2 < matrix1.double2d[i].size(); i2++)
@@ -340,11 +384,16 @@ matrix& operator-(matrix& matrix1, matrix matrix2)
 //* operator overloading
 matrix& operator*(matrix A, matrix &B)
 {
-
-    if(A.double2d[0].size() != B.double2d.size())
+    try
     {
-        std::cout << "Does not match";
-        throw "Array size not matching";
+        if(A.double2d[0].size() != B.double2d.size())
+        {
+            throw "Array size not matching";
+        }
+    }
+    catch(const char* msg)
+    {
+        std::cerr << msg << std::endl;
     }
 
 
