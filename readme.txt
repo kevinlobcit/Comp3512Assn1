@@ -1,4 +1,3 @@
 Kevin Lo
-A00952922
 
-100% completed
+Uses Matrix multiplication to find the google pagerank algorithm
